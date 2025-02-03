@@ -18,17 +18,18 @@ EXECUTABLE = $(BIN_DIR)/compiler
 all: $(EXECUTABLE)
 
 $(EXECUTABLE): $(OBJECTS)
-@mkdir -p $(BIN_DIR)
-$(CXX) $(CXXFlags) $^ -o $@
-@echo "Building compiler executable..."
+	@mkdir -p $(BIN_DIR)
+	$(CXX) $(CXXFlags) $^ -o $@
+	@echo "Building compiler executable..."
 
 # compile each .cpp file into an object file...
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
-@mkdir -p $(OBJ_DIR)
-$(CXX) $(CXXFlags) -c $< -o $@
+	@mkdir -p $(OBJ_DIR)
+	$(CXX) $(CXXFlags) -c $< -o $@
 
 # clean build files
 clean:
-rm -rf $(OBJ_DIR) $(BIN_DIR)
+	- del /s /q $(OBJ_DIR)\* $(BIN_DIR)\*
+	- rmdir /s /q $(OBJ_DIR) $(BIN_DIR)
 
 .PHONY: all clean
